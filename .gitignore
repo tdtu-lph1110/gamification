@@ -1,0 +1,43 @@
+# --- Python & General ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Virtual Environments ---
+# It is standard to name your env 'venv', 'env', or '.venv'
+venv/
+env/
+.venv/
+
+# --- Django ---
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# --- Static & Media ---
+# 'staticfiles' is where collectstatic outputs files. You usually don't commit this.
+staticfiles/
+# 'media' is where user-uploaded files go. NEVER commit this.
+media/
+
+# --- Environment Variables (CRITICAL) ---
+# These contain your Postgres passwords and Secret Keys.
+.env
+.env.local
+.env.*.local
+
+# --- PostgreSQL / Database Dumps ---
+# Ignore local DB dumps so you don't accidentally push sensitive data
+*.sql
+*.sql.gz
+*.dump
+
+# --- Docker (If applicable) ---
+postgres_data/
+.docker/
+
+# --- IDEs / Editors ---
+.vscode/
+.idea/
+.DS_Store
