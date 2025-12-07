@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',       # Để viết API
     'corsheaders',          # Để React kết nối được
     'gamification',         # App của chúng ta
+    'djoser',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +135,22 @@ AUTH_USER_MODEL = 'gamification.User'
 
 # Cấu hình CORS (Cho phép React localhost:3000 gọi vào)
 CORS_ALLOW_ALL_ORIGINS = True # Mở tạm thời để dev cho dễ
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",   # Domain của Frontend React
+    "http://127.0.0.1:3000",
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'gamification.authentication.CookieTokenAuthentication', # Lưu auth token vào cookie
+    ),
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated', # Bắt buộc phải đăng nhập mới được gọi API
+    ],
+}
+
+DJOSER = {
+    'SERIALIZERS': {
+        'current_user': 'gamification.serializers.UserSerializer',
+    },
+}

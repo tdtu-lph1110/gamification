@@ -73,3 +73,78 @@ class PointLog(models.Model):
         indexes = [
             models.Index(fields=['user', '-created_at']),
         ]
+
+# 4. Bảng Items (Vật phẩm trong cửa hàng)
+class Item(models.Model):
+    class ItemType(models.TextChoices):
+        COSMETIC = 'COSMETIC', 'Trang trí'
+        POWERUP = 'POWERUP', 'Vật phẩm chức năng'
+
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    item_type = models.CharField(max_length=20, choices=ItemType.choices)
+    price = models.PositiveIntegerField(default=0) # Giá mua bằng Currency
+    image_url = models.URLField(max_length=500, blank=True, null=True)
+    
+    # Thuộc tính game (JSON): VD {"bonus_xp": 10, "durability": 5}
+    attributes = models.JSONField(default=dict, blank=True)
+
+    def __str__(self):
+        return self.name
+
+# 5. Bảng UserItems (Hành trang - Inventory)
+# Quan hệ N-N: Một User có nhiều Item, Một Item có thể thuộc về nhiều User
+class UserItem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='inventory')
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    
+    quantity = models.PositiveIntegerField(default=1)
+    is_equipped = models.BooleanField(default=False) # Đang mặc/sử dụng hay không
+    acquired_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'item') # Một người không nên có 2 dòng cho cùng 1 item (thay vào đó tăng quantity)
+
+# 6. Bảng Quests (Nhiệm vụ / Bài tập)
+class Quest(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    
+    # Phần thưởng
+    xp_reward = models.PositiveIntegerField(default=10)
+    currency_reward = models.PositiveIntegerField(default=5)
+    
+    # Logic kiểm tra code (quan trọng cho phần Sandbox sau này)
+    # Ví dụ: test_case_input, expected_output
+    validation_data = models.JSONField(default=dict, blank=True) 
+
+    def __str__(self):
+        return self.title
+
+# 7. Bảng UserQuest (Tiến độ làm bài)
+class UserQuest(models.Model):
+    class Status(models.TextChoices):
+        TODO = 'TODO', 'Chưa làm'
+        IN_PROGRESS = 'IN_PROGRESS', 'Đang làm'
+        COMPLETED = 'COMPLETED', 'Hoàn thành'
+        FAILED = 'FAILED', 'Thất bại'
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='quest_progress')
+    quest = models.ForeignKey(Quest, on_delete=models.CASCADE)
+    status = models.CharField(max_length=20, choices=Status.choices, default=Status.TODO)
+    
+    # Lưu code người dùng đã nộp lần cuối
+    last_submitted_code = models.TextField(blank=True)
+    completed_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        unique_together = ('user', 'quest')
+
+
+
+
+
+
+
+
+
