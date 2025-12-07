@@ -20,3 +20,9 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+# Run the server: python manage.py runserver
+# Migrations: python manage.py makemigrations -> python manage.py migrate
+# Run init data: python manage.py init_data.py
+# Migrate with changesL python manage.py migrate
