@@ -1,0 +1,36 @@
+.characterContainer {
+    position: absolute;
+    transform: translate(-50%, -100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 20; /* Cao hơn vật phẩm nền, thấp hơn HUD */
+    transition: top 1s linear, left 1s linear; /* Di chuyển mượt mà */
+    cursor: pointer;
+}
+
+/* Hiệu ứng khi hover vào nhân vật */
+.characterContainer:hover .characterImg {
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.8)); /* Sáng viền vàng */
+}
+
+.characterImg {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    /* Sau này sẽ thay class này bằng logic Sprite Animation */
+}
+
+/* Tên nhân vật hiện trên đầu */
+.nameTag {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    white-space: nowrap;
+    border: 1px solid #8d6e63;
+    font-family: 'Merriweather', serif;
+}

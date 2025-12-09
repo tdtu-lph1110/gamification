@@ -1,0 +1,64 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #3e2723; /* Màu nâu gỗ đậm (hợp theme Khoa Cử) */
+    z-index: 9999; /* Luôn đè lên tất cả */
+
+    /* Flex để căn giữa icon */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    /* Animation Fade */
+    opacity: 0;
+    pointer-events: none; /* Để click xuyên qua khi ẩn */
+    transition: opacity 0.4s ease-in-out;
+}
+
+/* Khi active thì hiện rõ và chặn click */
+.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Hiệu ứng xoay icon */
+.loadingIcon {
+    width: 64px;
+    height: 64px;
+    animation: spin 2s linear infinite;
+    filter: drop-shadow(0 0 10px #ffd700);
+}
+
+.loadingText {
+    margin-top: 10px;
+    color: #ffd700;
+    font-family: 'Merriweather', serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    animation: pulse 1s infinite alternate;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.1);
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+@keyframes pulse {
+    from {
+        opacity: 0.6;
+    }
+    to {
+        opacity: 1;
+    }
+}

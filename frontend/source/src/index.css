@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --font-heading: 'Cormorant Garamond', serif;
+    --font-body: 'Merriweather', serif;
+    --font-hand: 'Patrick Hand', cursive;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: #fdf5e6;
+}
+
+h1,
+h2,
+h3,
+.game-title,
+.rank-name {
+    font-family: var(--font-heading);
+}
+
+.npc-dialog,
+.note-text {
+    font-family: var(--font-hand);
+}

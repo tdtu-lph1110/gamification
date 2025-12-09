@@ -1,0 +1,61 @@
+.sceneContainer {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Ảnh nền ngôi nhà */
+.houseBackground {
+    height: 100%;
+    width: auto;
+    object-fit: contain; /* Giữ tỷ lệ ảnh */
+    pointer-events: none; /* Để không bị drag ảnh */
+}
+
+/* Vùng tương tác (Hitbox) của cái cổng/cửa */
+.gateHitbox {
+    position: absolute;
+    /* Căn chỉnh vị trí này thủ công cho khớp với cái cửa trong ảnh house.png */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -20%); /* Tinh chỉnh để trúng cái cửa */
+    width: 150px;
+    height: 200px;
+
+    background-color: rgba(255, 0, 0, 0.3); /* Mở cái này để debug vị trí, sau đó set alpha = 0 */
+    cursor: pointer; /* Biến chuột thành bàn tay */
+    z-index: 10;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.gateHitbox:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Hiệu ứng hover sáng lên */
+    box-shadow: 0 0 15px #ffd700;
+}
+
+/* Label hiển thị tên khi hover */
+.interactionLabel {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+}
+
+.gateHitbox:hover .interactionLabel {
+    opacity: 1;
+}
