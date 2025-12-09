@@ -1,0 +1,100 @@
+.hudContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* QUAN TRỌNG: Cho phép click xuyên qua lớp HUD xuống Map */
+    z-index: 100; /* Luôn nằm trên cùng */
+    font-family: 'Merriweather', serif;
+}
+
+/* --- Góc trái: Avatar Info --- */
+.userInfo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: rgba(62, 39, 35, 0.8); /* Nền nâu trong suốt */
+    padding: 10px 15px;
+    border-radius: 50px;
+    border: 2px solid #d7ccc8;
+    pointer-events: auto; /* Cho phép hover/click vào vùng này */
+}
+
+.avatarFrame {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #ffd700;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.avatarImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.stats {
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.xpBarWrapper {
+    width: 100px;
+    height: 6px;
+    background-color: #5d4037;
+    border-radius: 3px;
+    margin-top: 4px;
+    overflow: hidden;
+}
+
+.xpBarFill {
+    height: 100%;
+    background-color: #4caf50;
+}
+
+/* --- Góc phải dưới: Toolbar --- */
+.toolbar {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 15px;
+    pointer-events: auto; /* Cho phép click vào nút */
+}
+
+.toolButton {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgba(255, 248, 225, 0.9);
+    border: 3px solid #8d6e63;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.toolButton:hover {
+    transform: translateY(-5px);
+    background-color: #fff;
+}
+
+.toolIcon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
